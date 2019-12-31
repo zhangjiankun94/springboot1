@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <!--连接表达式,地址都写绝对路径,不需要考虑项目名-->
+    <link rel="stylesheet" th:href="@{/css/index.css}"
+          href="../static/css/index.css" type="text/css">
+</head>
+<body>
+    <!--引入代码块 模板名称：fragment名称  将代码块的内容（html()）加入到标签-->
+    <div th:include="~{common::head1}"></div>
+
+    <div abc="ads"  th:text="${name}">我很好</div>
+
+    <!--会将html 原样显示-->
+    <div th:utext="${htmlTag}"></div>
+    <div th:text="${htmlTag}"></div>
+
+    <form th:action="@{/inser}" method="post">
+        <input type="text" th:value="${name}" value="" name="name">
+    </form>
+
+    用户名：<div th:text="${session.admin?.account}"></div>
+    密码：<div th:if="${session.admin!=null}" th:text="${#session.getAttribute('admin').password}"></div>
+    <!--if 判断 当条件成立时标签会存在，否则不存在-->
+    <a th:if="${session.admin!=null}" th:href="@{/list}">用户列表</a>
+
+    <!--替换内容 将引入的标签替换掉现有标签-->
+    <div th:replace="~{common::footer}"></div>
+
+    <!--插入内容 将引入的内容插入到现有标签中-->
+    <div th:insert="~{common::footer}">
+        <a>已有内容</a>
+    </div>
+</body>
+</html>

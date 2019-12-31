@@ -1,0 +1,82 @@
+        #数据库连接信息
+        spring:
+          datasource:
+            url: jdbc:oracle:thin:@localhost:1521:xe
+            username: blog
+            password: 123456
+          thymeleaf:
+            cache: false
+          redis:
+            ##单机
+            host: 192.168.190.76
+            port: 6379
+            ##
+            ##集群
+            ##cluster:
+            ##  nodes:
+            ##    - 192.168.166.81:7000
+            ##    - 192.168.166.81:7001
+            ##    - 192.168.166.81:7002
+            ##    - 192.168.166.81:7003
+            ##    - 192.168.166.81:7004
+            ##    - 192.168.166.81:7005
+            ##哨兵
+            #          sentinel:
+            #            master: mymaster
+            #            nodes: 192.168.166.81:26379,192.168.166.81:26380,192.168.166.81:26381
+            jedis:
+              pool:
+                ### 连接池最大连接数（使用负值表示没有限制）
+                max-active: 9
+                ### 连接池最大阻塞等待时间（使用负值表示没有限制）
+                max-wait: -1
+                ### 连接池中的最大空闲连接
+                max-idle: 9
+                ### 连接池中的最小空闲连接
+                min-idle: 0
+            ### Redis数据库索引(默认为0)
+            database: 0
+            ### 连接超时时间（毫秒）
+            timeout: 60000
+        #配置端口号
+        server:
+          port: 8088
+        #配置mybatis
+        mybatis:
+          mapper-locations: classpath:mapping/*.xml
+        #分页插件
+        pagehelper:
+          helper-dialect: oracle
+          reasonable: true
+          page-size-zero: true
+          params: pageNum=pageHelperStart;pageSize=pageHelperRows
+        #自定义配置属性，指定上传的路径.
+        uploadpath: E:/upload/
+        #文件访问路径
+        vpath: /uploadFile/
+        #指定日志
+        logging:
+          level:
+            root: info
+            com.seecen.springboot.mapper: debug
+          #file:
+            #path: E:\\Seecen\\SeecenData\\File
+
+        #自定义配置 swagger
+        swagger:
+          enable: true
+
+          ##配置shiro
+        shiro:
+          enabled: true
+          web:
+            enabled: true
+          #登录成功地址
+          successUrl: /index
+          #登录页面地址
+          loginUrl: /toLogin
+          #未授权的地址
+          unauthorizedUrl: /unauthorized
+          sessionManager:
+            sessionIdCookieEnabled: true  #是否允许将sesisonId保存在cookie中
+            sessionIdUrlRewritingEnabled: true   #是否允许sessionId 显示在地址栏

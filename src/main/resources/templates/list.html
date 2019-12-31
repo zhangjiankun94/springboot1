@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                    xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表页面</title>
+</head>
+<body>
+<table>
+    <tr style="text-align: center">
+        <td>序号</td>
+        <td>ID</td>
+        <td>用户名</td>
+        <td>密码</td>
+        <td>姓名</td>
+        <td>状态</td>
+        <td>性别</td>
+        <td>注册时间</td>
+        <td>操作</td>
+    </tr>
+    <!--<tr th:each="admin,iterStat:${admins}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="${admin.id}"></td>
+        <td th:text="${admin.account}"></td>
+        <td th:text="${admin.password}"></td>
+        <td th:text="${admin.name}"></td>
+        <td th:text="${admin.status eq '1'?'正常':'注销'}"></td>
+        <td th:text="${admin.sex eq '1'?'男':'女'}"></td>
+        <td th:text="${#dates.format(admin.createtime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td>
+            <a th:href="@{/delete(id=${admin.id})}">删除</a>
+            <a th:href="@{/update(id=${admin.id})}">修改</a>
+        </td>
+    </tr>-->
+    <tr th:object="${admin}" th:each="admin,iterStat:${admins}">
+        <td th:text="${iterStat.count}"></td>
+        <td th:text="*{id}"></td>
+        <td th:text="*{account}"></td>
+        <td th:text="*{password}"></td>
+        <td th:text="*{name}"></td>
+        <td th:text="*{status eq '1'?'正常':'注销'}"></td>
+        <td th:text="*{sex eq '1'?'男':'女'}"></td>
+        <td th:text="*{#dates.format(createtime,'yyyy-MM-dd HH:mm:ss')}"></td>
+        <td>
+            <a shiro:hasPermission="admin:delete" th:href="@{/delete(id=*{id})}">删除</a>
+            <a shiro:hasPermission="admin:update" th:href="@{/update(id=*{id})}">修改</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

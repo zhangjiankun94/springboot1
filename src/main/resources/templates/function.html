@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>thymeleaf函数</title>
+</head>
+<body>
+    时间：<div th:text="${#dates.format(now,'yyyy-MM-dd HH:mm:ss')}"></div>
+    年份：<div th:text="${#dates.year(now)}"></div>
+    月份：<div th:text="${#dates.month(now)}"></div>
+    月份名：<div th:text="${#dates.monthName(now)}"></div>
+    创建时间：<div th:text="${#dates.create('1990','10','01')}"></div>
+
+    <h1 style="color: red">字符串函数</h1>
+    长度：<div th:text="${#strings.length('abc')}"></div>
+    追加：<div th:text="${#strings.append('abc','def')}"></div>
+
+
+    <h1 style="color: red">list方法</h1>
+    是否为空：<div th:text="${#lists.isEmpty(strList)}"></div>
+</body>
+</html>
